@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15-alpine
@@ -22,7 +20,7 @@ services:
       dockerfile: Dockerfile
     container_name: ladisch-energie-backend
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/ladisch_energie
       JWT_SECRET: your-jwt-secret-key
       PORT: 3001
@@ -32,9 +30,6 @@ services:
       - postgres
     networks:
       - ladisch-network
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
 
   frontend:
     build:
@@ -49,9 +44,6 @@ services:
       - backend
     networks:
       - ladisch-network
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
 
 volumes:
   postgres_data:
